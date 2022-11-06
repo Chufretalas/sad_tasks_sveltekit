@@ -9,25 +9,37 @@ export const actions: Actions = {
     const data = await request.formData()
     const title = data.get("title")
     const content = data.get("content")
-    const success = await client.records.create("tasks", { title, content })
+    let success = true
+    try {
+      await client.records.create("tasks", { title, content })
+    } catch (error) {
+      console.log(error)
+      success = false
+    }
+    return { success }
   }
 }
 
 
 export const load: PageServerLoad = async ({ params }: any) => {
-  const data = await client.records.getFullList("tasks")
-  const mappedData = data.map((task) => {
-    return {
-      id: task.id,
-      title: task.title,
-      content: task.content,
-      created: task.created,
-      updated: task.updated
-    }
-  })
+  let mappedData: ITask[] = []
+  try {
+    const data = await client.records.getFullList("tasks")
+    mappedData = data.map((task) => {
+      return {
+        id: task.id,
+        title: task.title,
+        content: task.content,
+        created: task.created,
+        updated: task.updated
+      }
+    })
+  } catch (error) {
+  }
+
   return {
     post: {
       tasks: mappedData
     }
-  };
+  }
 }

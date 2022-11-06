@@ -1,8 +1,10 @@
 <script lang="ts">
-    import TaskCard from "$components/TaskCard.svelte"
-    import type { PageData } from "./$types"
+    import TaskCard from "$components/TaskCard.svelte";
+    import type { PageData, ActionData } from "./$types";
 
-    export let data: PageData
+    export let data: PageData;
+
+    export let form: ActionData;
 
     const exampleTask = {
         id: "bndsajkds-dsnakd-dsand",
@@ -41,12 +43,20 @@
             <button class="submit-button">Save</button>
         </form>
     </section>
+    {#if form?.success}
+        <span class="success-message">Successfully saved the new task</span>
+    {:else if form?.success === false}
+        <span class="failure-message">Something went wrong when saving your task</span>
+    {/if}
     <hr class="separator" />
     <section class="list-section">
         <h2 class="list-section__title">Your Tasks</h2>
         <ul class="task-list">
+            {#if data.post.tasks.length === 0}
+                <span>Nothing to see here</span>
+            {/if}
             {#each data.post.tasks as task}
-                <TaskCard task={task} />
+                <TaskCard {task} />
             {/each}
         </ul>
     </section>
@@ -115,6 +125,14 @@
         background-color: var(--alt-accent-color-darker);
     }
     /* -------------------------------------------- */
+    .success-message {
+        margin-top: 10px;
+        color: var(--alt-accent-color);
+    }
+    .failure-message {
+        margin-top: 10px;
+        color: #ef2525;
+    }
     .separator {
         background-color: var(--accent-color);
         width: 30vw;
@@ -133,7 +151,7 @@
     .task-list {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-around;
-        row-gap: 10px;
+        justify-content: center;
+        gap: 15px;
     }
 </style>
