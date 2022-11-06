@@ -2,7 +2,7 @@
     import TaskCard from "$components/TaskCard.svelte";
 
     const exampleTask = {
-        id: 1,
+        id: "bndsajkds-dsnakd-dsand",
         title: "Cool title",
         content: "something really important to do",
     };
@@ -15,7 +15,7 @@
 <main>
     <h1 class="main-title">SadTasks :( SvelteKit</h1>
     <section class="form-section">
-        <form action="POST">
+        <form method="POST" action="?/save_task">
             <div class="form-group">
                 <label for="title">Title</label>
                 <input name="title" type="text" id="title" placeholder="Type here..." required/>

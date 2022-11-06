@@ -1,5 +1,7 @@
 export default interface ITask {
-    id: number | null
+    id: string | null
     title: string
     content: string
+    created: string
+    updated: string
 }
