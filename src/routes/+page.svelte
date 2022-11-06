@@ -1,5 +1,8 @@
 <script lang="ts">
-    import TaskCard from "$components/TaskCard.svelte";
+    import TaskCard from "$components/TaskCard.svelte"
+    import type { PageData } from "./$types"
+
+    export let data: PageData
 
     const exampleTask = {
         id: "bndsajkds-dsnakd-dsand",
@@ -18,11 +21,22 @@
         <form method="POST" action="?/save_task">
             <div class="form-group">
                 <label for="title">Title</label>
-                <input name="title" type="text" id="title" placeholder="Type here..." required/>
+                <input
+                    name="title"
+                    type="text"
+                    id="title"
+                    placeholder="Type here..."
+                    required
+                />
             </div>
             <div class="form-group">
                 <label for="content">Content</label>
-                <textarea name="content" type="text" id="content" placeholder="Type here..."/>
+                <textarea
+                    name="content"
+                    type="text"
+                    id="content"
+                    placeholder="Type here..."
+                />
             </div>
             <button class="submit-button">Save</button>
         </form>
@@ -31,14 +45,9 @@
     <section class="list-section">
         <h2 class="list-section__title">Your Tasks</h2>
         <ul class="task-list">
-            <TaskCard task={exampleTask} />
-            <TaskCard task={exampleTask} />
-            <TaskCard task={exampleTask} />
-            <TaskCard task={exampleTask} />
-            <TaskCard task={exampleTask} />
-            <TaskCard task={exampleTask} />
-            <TaskCard task={exampleTask} />
-            <TaskCard task={exampleTask} />
+            {#each data.post.tasks as task}
+                <TaskCard task={task} />
+            {/each}
         </ul>
     </section>
 </main>
@@ -74,7 +83,8 @@
         display: flex;
         flex-direction: column;
     }
-    .form-group input, .form-group textarea {
+    .form-group input,
+    .form-group textarea {
         border-radius: 5px;
         border: 2px solid var(--alt-accent-color);
     }

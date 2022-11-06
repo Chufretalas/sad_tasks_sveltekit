@@ -6,7 +6,6 @@
 <div class="task-card-wrapper">
     <h3 class="task-card__title">{task.title}</h3>
     <p class="task-card__content">{task.content}</p>
-    <span>{task.id}</span>
 </div>
 
 <style>
@@ -30,6 +29,7 @@
         margin-bottom: 5px;
     }
     .task-card__content {
+        display: inline-block;
         font-size: 1rem;
         white-space: pre;
     }
