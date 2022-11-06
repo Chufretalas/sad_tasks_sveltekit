@@ -3,13 +3,27 @@
 :root {
     --primary-color: #222831;
     --secondary-color: #393E46;
+    --dark-color: #161422;
     --light-color: #EEEEEE;
-    --accent-color: #00ADB5;
+    --accent-color: #0bc5ce;
+    --alt-accent-color: #00b539;
+    --alt-accent-color-darker: #008329;
 }
 
 body {
     background-color: var(--primary-color);
     color: var(--light-color);
+    font-family: 'Poppins', sans-serif;
+}
+
+input, textarea {
+    background-color: var(--dark-color);
+    border: none;
+    border-style: none;
+    color: var(--light-color);
+}
+
+button, textarea, input {
     font-family: 'Poppins', sans-serif;
 }
 
